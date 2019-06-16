@@ -11,16 +11,21 @@ class App extends Component {
     };
   }
   render() {
+    const showDecrementError = this.state.showDecrementError;
+    let errorMessage;
+
+    if (showDecrementError) {
+      errorMessage = (
+        <h2 data-test="error-message"> You can't decrement below 0</h2>
+      );
+    }
+
     return (
       <div data-test="component-app">
         <h1 data-test="counter-display">
           The counter is currently {this.state.counter}
         </h1>
-        {this.state.showDecrementError ? (
-          <h2 data-test="error-message"> You can't decrement below 0</h2>
-        ) : (
-          <h2>''</h2>
-        )}
+        {errorMessage}
 
         <button
           data-test="increment-button"
@@ -33,6 +38,7 @@ class App extends Component {
         >
           Increment counter
         </button>
+
         <button
           data-test="decrement-button"
           onClick={() => {
